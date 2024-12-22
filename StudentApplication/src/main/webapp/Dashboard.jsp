@@ -4,226 +4,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Student Application DashBoard</title>
-	<style type="text/css">
-		body, h1, h2, h3, p, ul, li {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-		
-		body {
-			font-family: Arial, sans-serif;
-			background: linear-gradient(to right, #e0f7fa, #80deea);
-			color: #333;
-		}
-		
-		.header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 1rem;
-			background: #004d40;
-			color: white;
-		}
-		
-		
-		.logo {
-			font-size: 1.5rem;
-			font-weight: bold;
-		}
-		
-		.nav ul {
-			display: flex;
-			list-style: none;
-		}
-		
-		.nav ul li {
-			margin: 0 1rem;
-		}
-		
-		.nav ul li a {
-			color: white;
-			text-decoration: none;
-		}
-		
-		.container {
-			display: flex;
-			flex-wrap: wrap;
-		}
-		
-		.sidebar, .right-sidebar {
-			background: #e8f5e9;
-			padding: 1rem;
-			flex: 1 1 20%;
-			min-width: 200px;
-		}
-		
-		.main-content {
-			height: 100vh;
-			flex: 1 1 60%;
-			padding: 1rem;
-			background: white;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		}
-		
-		.welcome{
-			display:flex;
-			justify-content:center;
-			align-content: center;
-		}
-		
-		.sidebar ul, .right-sidebar ul {
-			list-style: none;
-		}
-		
-		.sidebar ul li, .right-sidebar ul li {
-			margin: 1rem 0;
-		}
-		
-		.sidebar ul li a, .right-sidebar ul li a {
-			text-decoration: none;
-			color: #0078d7;
-		}
-		
-		.logout {
-			margin-top: 2rem;
-			padding: 0.5rem;
-			background: #d9534f;
-			color: white;
-			border: none;
-			cursor: pointer;
-		}
-		
-		button {
-			padding: 0.5rem;
-			background: #004d40;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-		
-		button:hover {
-			background: #00695c;
-		}
-		
-		.footer {
-			text-align: center;
-			padding: 1rem;
-			background: #00796b;
-			color: white;
-			margin-top: 1rem;
-		}
-		.table-container {
-        overflow-x: auto;
-        margin: 1rem 0;
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 0 auto;
-    }
-
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-    }
-
-    .table th {
-        background-color: #004d40;
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    .table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .table tr:hover {
-        background-color: #d0f0c0;
-    }
-
-    .table td {
-        color: #333;
-    }
-
-    @media (max-width: 768px) {
-        .table th, .table td {
-            font-size: 0.9rem;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Application Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    }
-	</style>
+        .hero-section {
+            background: linear-gradient(to right, #00796b, #004d40);
+            color: white;
+            padding: 50px 0;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s ease-in-out;
+        }
+        footer a {
+            color: #fff;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
 <body>
-<%student s=(student)session.getAttribute("student"); %>
-<header class="header">
-	<div class="logo">welcome to EduLMS</div>
-	<nav class="nav">
-		<ul>
-		<%if(s.getId()==1) {%>
-			<li><a href="#">view all Data</a></li>
-			<%} %>
-			<li><a href="forgotpassword.jsp">Reset Pin</a></li>
-			<li><a href="#">Profile</a></li>
-			<li><a href="Update.jsp">update</a></li>
-			<li><a href="#">Notifications</a></li>
-			<li><a href="#">Help</a></li>
-		</ul>
-		<form action="logout" method="post">
-				
-					<input type="submit" name="logout" value="Logout">
-		</form>
-	</nav>
-</header>
+<% student s = (student) session.getAttribute("student"); %>
 
-<main class="container">
-	<aside class="sidebar">
-		<ul>
-			<li><a href="#">DashBoard</a></li>
-			<li><a href="#">view</a></li>
-			
-		</ul>
-	</aside>
-	<section class="main-content">
-    <h2 class="welcome">Welcome, [<%=s.getName() %>]</h2>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>View Your Data</h3>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Mail ID</th>
-                            <th>Branch</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><%=s.getId()%></td>
-                            <td><%=s.getName()%></td>
-                            <td><%=s.getPhone()%></td>
-                            <td><%=s.getMailId()%></td>
-                            <td><%=s.getBranch()%></td>
-                            <td><%=s.getLocation()%></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">EduLMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <% if (s.getId() == 1) { %>
+                <li class="nav-item"><a href="viewusers.jsp" class="nav-link">View All Data</a></li>
+                <% } %>
+                <li class="nav-item"><a href="forgotpassword.jsp" class="nav-link">Reset Pin</a></li>
+                <li class="nav-item"><a href="Update.jsp" class="nav-link">Update Profile</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Notifications</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Help</a></li>
+            </ul>
+            <form action="logout" method="post">
+                <input type="submit" name="logout" value="Logout" class="btn btn-sm ms-3" style="color : white; font-weight : bold; font-size : 16px; left : 0px; padding: 12px; ">
+            </form>         
+         </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1>Welcome, <%= s.getName() %></h1>
     </div>
 </section>
 
+<!-- Main Content -->
+<main class="container my-5">
+    <div class="row">
+        <!-- Data Cards -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Your Details</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>ID:</strong> <%= s.getId() %></li>
+                        <li class="list-group-item"><strong>Name:</strong> <%= s.getName() %></li>
+                        <li class="list-group-item"><strong>Phone:</strong> <%= s.getPhone() %></li>
+                        <li class="list-group-item"><strong>Email:</strong> <%= s.getMailId() %></li>
+                        <li class="list-group-item"><strong>Branch:</strong> <%= s.getBranch() %></li>
+                        <li class="list-group-item"><strong>Location:</strong> <%= s.getLocation() %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Actions</h5>
+                    <a href="Update.jsp" class="btn btn-primary mb-2">Update Information</a>
+                    <a href="forgotpassword.jsp" class="btn btn-secondary mb-2">Reset PIN</a>
+                    <a href="#" class="btn btn-info mb-2">Notifications</a>
+                    <a href="#" class="btn btn-warning mb-2">Help</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
-<footer class="footer">
-	<p>&copy; 2024 EduLMS. All Rights Reserved.</p>
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+        <p class="mb-1">&copy; 2024 EduLMS. All Rights Reserved.</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="#">Terms of Service</a></li>
+            <li class="list-inline-item"><a href="#">Contact Us</a></li>
+            <li class="list-inline-item"><a href="#">eduLMS@gmail.in</a></li>
+        </ul>
+    </div>
 </footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,102 +1,110 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS for animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
+            background-image: url("https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-image:url("https://www.iaepnetwork.org/uploads/1/1/8/6/118657739/dec-2-2020-webinar-image-1_orig.jpg");
-        	background-repeat: no-repeat;
-			background-size: cover;
-        
+            font-family: Arial, sans-serif;
+            color: #333;
         }
-        .form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            padding: 10px 60px;
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .form h1 {
+        .form-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+        .form-container h1 {
             margin-bottom: 20px;
-            font-size: 24px;
             text-align: center;
-            text-decoration: underline;
-        }
-        .form label {
-            display: block;
-            margin-bottom: 8px;
             font-weight: bold;
         }
-        .form input[type="text"], .form input[type="password"], .form input[type="email"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .form-container input {
+            margin-bottom: 15px;
         }
-        .form input[type="submit"] {
+        .form-container .btn {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
+            background: linear-gradient(90deg, #007bff, #0056b3);
             color: #fff;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
         }
-        .form input[type="submit"]:hover {
-            background-color: #0056b3;
+        .form-container .btn:hover {
+            background: linear-gradient(90deg, #0056b3, #003c7a);
         }
-        .form .links {
+        .form-container .links {
             text-align: center;
             margin-top: 10px;
         }
-        .form .links a {
+        .form-container .links a {
             text-decoration: none;
             color: #007bff;
-            font-size: 14px;
-            margin: 0 10px;
+            font-weight: bold;
         }
-        .form .links a:hover {
+        .form-container .links a:hover {
             text-decoration: underline;
         }
-       
     </style>
 </head>
 <body>
-    <form action="login" class="form" method="post">
-    
+    <div class="form-container" data-aos="fade-up">
         <h1>Login</h1>
-        <%String success=(String)request.getAttribute("success");
-    	if(success!=null){%>
-    	<h1 class="succuss" style="color: red"><%=success%></h1>
-    	<% }%>
-        <%String failure=(String)request.getAttribute("failure");
-    	if(failure!=null){%>
-    	<h1 class="failuremsg" style="color: red"><%=failure%></h1>
-    	<% }%>
-        <label for="mailid">Student Mail ID:</label>
-        <input type="email"  name="mailid" placeholder="examp@gmail.com" required>
-        <label for="password">Enter Password:</label>
-        <input type="password" name="password" placeholder="create password" required>
-        <input type="submit" value="Login">
-        
-        <div class="links">
-            <a href="forgotpassword.jsp">Forgot Password?</a>
+        <% String success = (String) request.getAttribute("success");
+           if (success != null) { %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+        <% String failure = (String) request.getAttribute("failure");
+           if (failure != null) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= failure %>
+            </div>
+        <% } %>
+        <form action="login" method="post">
+            <div class="mb-3">
+                <label for="mailid" class="form-label">Student Mail ID:</label>
+                <input type="email" name="mailid" class="form-control" placeholder="example@gmail.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Enter Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div class="links mt-3">
+            <a href="forgotpassword.jsp">Forgot Password?</a> | 
             <a href="signup.jsp">Sign Up</a>
         </div>
-    </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+        });
+    </script>
 </body>
 </html>

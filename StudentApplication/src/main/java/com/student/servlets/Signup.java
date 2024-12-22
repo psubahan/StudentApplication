@@ -60,6 +60,9 @@ public class Signup extends HttpServlet
 				RequestDispatcher rd=req.getRequestDispatcher("signup.jsp");
 				rd.forward(req, resp);
 			}
+			
+			RequestDispatcher rd=req.getRequestDispatcher("login.jsp");
+			rd.forward(req, resp);
 		}
 	}
 }

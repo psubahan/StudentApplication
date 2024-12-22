@@ -142,7 +142,7 @@
 
         <button type="submit">Sign Up</button>
         
-        <h4>Already have an account? <a href="Login.html">Log In</a></h4>
+        <h4>Already have an account? <a href="login.jsp">Log In</a></h4>
     </form>
 </body>
 </html>

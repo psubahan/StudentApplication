@@ -219,4 +219,36 @@ public class StudentDAOimpl implements StudentDao
 		
 	}
 
+	@Override
+	public student getstudent(int id) {
+		String query="SELECT * FROM STUDENT_1 WHERE ID=?";
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		student s=null;
+		try 
+		{
+			ps=con.prepareStatement(query);
+			ps.setLong(1, id);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				s=new student();
+				s.setId(rs.getInt("id"));
+				s.setName(rs.getString("name"));
+				s.setPhone(rs.getLong("phone"));
+				s.setMailId(rs.getString("mailid"));
+				s.setBranch(rs.getString("branch"));
+				s.setLocation(rs.getString("location"));
+				s.setPassword(rs.getString("password"));
+				s.setDate(rs.getString("date"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s ;
+	}
+
 }
